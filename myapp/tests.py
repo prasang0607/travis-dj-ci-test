@@ -12,3 +12,13 @@ class AnimalTestCase(TestCase):
         cat = Animal.objects.get(name="cat")
         self.assertEqual(lion.speak(), 'The lion says "roar"')
         self.assertEqual(cat.speak(), 'The cat says "meow"')
+
+    def test_animal_count(self):
+        ct = Animal.objects.count()
+        self.assertEqual(2, ct)
+
+    def test_animal_count_after_deletion(self):
+        Animal.objects.get(name="lion").delete()
+        Animal.objects.get(name="cat").delete()
+        ct = Animal.objects.count()
+        self.assertEqual(0, ct)
